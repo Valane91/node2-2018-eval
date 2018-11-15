@@ -4,8 +4,6 @@ const fetch = require('node-fetch');
  
 // Store the result of all the fetches.
 let historic = [];
-let count = 0; 
-
 
 // Store the different uris we are going to fetch. 
 const uris = {
@@ -33,11 +31,12 @@ const addResult = (fetchResult) => {
      */
     if(done) {
 
-        count += 1; 
+        const timeData = (fetchResult['time'].data === 'ERROR') ? 'ERROR' : fetchResult['time'].data.time;
+        const secretData = (fetchResult['secret'].data === 'ERROR') ? 'ERROR' :  fetchResult['secret'].data.secret;
 
         const resultJSON = {
-            'time' : fetchResult['time'].data.time
-            , 'secret' : fetchResult['secret'].data.secret
+            'time' : timeData
+            , 'secret' : secretData
         }
  
         historic.unshift(resultJSON);         
@@ -74,8 +73,8 @@ const fetchURI = (key, fetchResult) => {
             addResult(fetchResult); 
         })
         .catch(err => {
-            console.log(err); 
-            process.exit(); 
+            fetchResult[key].data = 'ERROR'; 
+            fetchResult[key].done = true; 
         }); 
     }
 }
@@ -108,9 +107,14 @@ const fetchData = () => {
 
  
     fetchURI('time', fetchResult);
-    fetchURI('secret', fetchResult);
+    fetchURI('secret', fetchResult); 
 }
 
+/*
+ * We create our route for each '/:id' retrieve the in antechronological order
+ * for 1 to :id.
+ *  
+ */
 app.get('/:id', (req, res) => {
     const id = req.params.id; 
 
@@ -132,6 +136,9 @@ app.get('/:id', (req, res) => {
     
 }); 
 
+/*
+ * Launch the server on port 4002
+ */
 app.listen(4002, () => {
     console.log('Listenning on port 4002'); 
 
