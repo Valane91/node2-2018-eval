@@ -12,6 +12,14 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'DELETE, PUT, GET, POST');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
+
 // Encrypt funcion using Crypo
 function encrypt(text){
     var cipher = crypto.createCipher(algorithm,password)
@@ -44,7 +52,8 @@ app.get('/secret', function (req, res) {
 });
 
 app.put('/secret', function (req, res) {
-    var hw = encrypt(req.query.secret)
+    console.log(req);
+    var hw = encrypt(req.body.secret)
     fs.outputFile('data/secret.txt', hw)
         .then(() => fs.readFile('data/secret.txt', 'utf8'))
         .then(data => {

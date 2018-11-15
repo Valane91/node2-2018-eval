@@ -7,6 +7,8 @@
 </head>
 <body>
 <div id="server-vue">
+    <input v-model="message">
+    <button v-on:click="addNewTodo">Add</button>
     <ul id="example-1">
         <li v-for="item in results">
             {{item}}

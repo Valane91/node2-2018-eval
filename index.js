@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const fetch = require('node-fetch');
 
 const fetchServer = require('./fetchServer'); 
 
@@ -23,17 +24,41 @@ app.get('/', function(req, res) {
 
 app.get('/server', function(req, res) {
     var datas = fetchServer.fetchData()
-    console.log(datas);
     res.json({data:datas})
 });
 app.get('/server/:name', function(req, res) {
    console.log("toto")
+});
+app.put('/secret', function(req, res) {
+    var secret = fetchURI(req.body.secret)
+    //res.json(secret);
 });
 
 
 app.use('/client',
     express.static(__dirname + '/public')
 )
+
+const fetchURI = (body) => {
+        fetch("http://localhost:4001/secret", {
+            method: 'PUT',
+            headers:{
+                'Accept' : 'application/json',
+                'Content-type' : 'application/json',
+            },
+            body:JSON.stringify(body),
+        })
+            .then(res => res.json())
+            .then(res => {
+               return res
+            })
+            .catch(err => {
+                console.log(err);
+                process.exit();
+            });
+
+}
+
 
 
 app.listen(port, () => {

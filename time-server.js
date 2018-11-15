@@ -3,7 +3,7 @@ const app = express();
 const moment = require('moment');
 
 app.get('/', (req, res) => {
-  let now = moment().local().format('hh:mm:ss')
+  let now = moment().local('fr').format('hh:mm:ss')
   var contype = req.headers['accept'];
    if (!contype || contype.indexOf('application/json') !== 0){
      res.send('<h1 style= "color:blue">'+now+'</h1>');
