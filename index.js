@@ -20,6 +20,17 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(public, 'index.html'));
 });
 
+
+app.get('/server', function(req, res) {
+    var datas = fetchServer.fetchData()
+    console.log(datas);
+    res.json({data:datas})
+});
+app.get('/server/:name', function(req, res) {
+   console.log("toto")
+});
+
+
 app.use('/client',
     express.static(__dirname + '/public')
 )
@@ -27,10 +38,4 @@ app.use('/client',
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}!`)
-    let datas; 
-
-    setInterval(() => {
-        datas = fetchServer.fetchData()
-    }, 1000); 
-
 });

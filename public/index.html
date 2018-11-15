@@ -7,7 +7,13 @@
 </head>
 <body>
 <div id="server-vue">
-{{selectedTime}}
+    <ul id="example-1">
+        <li v-for="item in results">
+            {{item}}
+
+            <!--Time: {{value.time}} | Secret: {{value.secret}} | HistoryServer : {{value.historyServer[0]}}-->
+        </li>
+    </ul>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
