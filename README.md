@@ -8,7 +8,9 @@ The subject of this evaluation can be found here : https://gitlab.rixo.fr/akad/n
 ## Installation 
 
 First step : First install node and npm. 
+
 Second step : Then clone this repo and in the root directory of your clone launch in a terminal "npm install". 
+
 Third step : Everything is all setup 'Tada!'
 
 
