@@ -12,7 +12,7 @@ let datasHistoric = [];
 const uris = {
     'time': 'http://localhost:4000/'
     , 'secret': 'http://localhost:4001/secret'
-    , 'historyServer' : 'http://localhost:4002/10'
+    , 'historyServer' : 'http://localhost:4002/1'
 }; 
 
 

@@ -16,9 +16,22 @@ const vm = new Vue({
       
     },
     created: function() {
+        var vm = this;
         this.intervalid1 = setInterval(() => {
-           console.log("rprpr")
-        }, 3000);
+
+            LoadTime('/server')
+                .then(servers => {
+                    console.log(servers)
+                        vm.results = servers.data;
+                })
+                .catch(err => {
+                    //alert("Ooops")
+                })
+                .then(servers => {
+
+                })
+
+        }, 2000);
     },
 
 })
