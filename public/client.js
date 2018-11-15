@@ -1,23 +1,30 @@
-{
-  const formatTime = date =>
-    moment(date).local().format('hh:mm:ss')
-
-
-  const vm = new Vue({
-    el: '#time',
+$( document ).ready(function(){
+const vm = new Vue({
+    el: '#server-vue',
     data: {
-      //selectedTime: '',
+      selectedTime: 'test',
+        servers: ['localhost:4000','localhost:4001','localhost:4002'],
+        results:[]
     },
     computed: {
-      selectedTime: function() {
-          return this.getTime()
-        },
+
       },
     methods: {
-      getTime: function() {
-        return formatTime(new Date())
-      },
+      loadServers :function () {
 
+      }
+      
     },
-  })
-}
+    created: function() {
+        this.intervalid1 = setInterval(() => {
+           console.log("rprpr")
+        }, 3000);
+    },
+
+})
+    function LoadTime(url) {
+        return fetch(url)
+            .then(response => response.json())
+    }
+
+});
