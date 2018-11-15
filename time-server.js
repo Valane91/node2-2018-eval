@@ -8,7 +8,7 @@ app.get('/', (req, res) => {
    if (!contype || contype.indexOf('application/json') !== 0){
      res.send('<h1 style= "color:blue">'+now+'</h1>');
    }else{
-     res.json({time:now})
+     res.json({'time':now})
    }
 })
 

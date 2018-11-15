@@ -40,7 +40,7 @@ app.get('/', function(req, res) {
 app.get('/secret', function (req, res) {
     fs.readFile('data/secret.txt','utf-8').then(function (data) {
         var secret = decrypt(data);
-        res.send(secret)
+        res.json({'secret':secret})
     }).catch (function (e) {
         console.log(e)
     });
