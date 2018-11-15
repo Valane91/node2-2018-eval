@@ -15,7 +15,9 @@ Third step : Everything is all setup 'Tada!'
 ## Walkthrough 
 
 Exercise 2 : Open a command line, go to the root of the project and launch "node time-server.js" and enjoy the result at "http://localhost:4000"
+
 Exercise 3 : Open a command line, go to the root of the project and launch "node secret-server.js" and enjoy the result at "http://localhost:4001"
+
 Exercise 4 : Do what you did for Exercise 2 and Exercise 3 in their own command line, and keep those command lines open. 
 Open a new command line, go to the root of the project and launch "node  sechisrv.js" and enjoy the result at "http://localhost:4000/:id"
 
