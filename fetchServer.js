@@ -45,10 +45,14 @@ const addResult = (fetchResult) => {
      */
     if(isDone) {
 
+        const timeData = (fetchResult['time'].data === 'DOWN') ? 'DOWN' : fetchResult['time'].data.time;
+        const secretData = (fetchResult['secret'].data === 'DOWN') ? 'DOWN' :  fetchResult['secret'].data.secret;
+        const historyServerData = fetchResult['historyServer'].data;
+
         const resultJSON = {
-            'time' : fetchResult['time'].data.time
-            , 'secret' : fetchResult['secret'].data.secret
-            , 'historyServer' : fetchResult['historyServer'].data
+            'time' : timeData
+            , 'secret' : secretData
+            , 'historyServer' : historyServerData
         }
 
         datasHistoric.push(resultJSON);
