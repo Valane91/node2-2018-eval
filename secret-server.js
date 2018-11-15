@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-
+// Encrypt funcion using Crypo
 function encrypt(text){
     var cipher = crypto.createCipher(algorithm,password)
     var crypted = cipher.update(text,'utf8','hex')
@@ -20,16 +20,13 @@ function encrypt(text){
     return crypted;
 }
 
+// Decrypt funcion using Crypo
 function decrypt(text){
     var decipher = crypto.createDecipher(algorithm,password)
     var dec = decipher.update(text,'hex','utf8')
     dec += decipher.final('utf8');
     return dec;
 }
-var hw = encrypt("itakdemy")
-console.log(hw)
-// outputs hello world
-console.log(decrypt(hw));
 
 var public = path.join(__dirname, 'public');
 var momentFile = path.join(__dirname, 'node_modules');
@@ -40,9 +37,9 @@ app.get('/', function(req, res) {
 app.get('/secret', function (req, res) {
     fs.readFile('data/secret.txt','utf-8').then(function (data) {
         var secret = decrypt(data);
-        res.send(secret)
+        res.status(200).json({'secret':secret})
     }).catch (function (e) {
-        console.log(e)
+        res.status(400).json({'error':"bad request"})
     });
 });
 
@@ -51,14 +48,12 @@ app.put('/secret', function (req, res) {
     fs.outputFile('data/secret.txt', hw)
         .then(() => fs.readFile('data/secret.txt', 'utf8'))
         .then(data => {
-            res.json({status:"new password set"})
+            res.status(200).json({'status':'new password set'})
         })
         .catch(err => {
-            res.send(err)
+            res.status(400).json({'status':'bad request'})
         })
 });
-
-
 app.use('/scripts', express.static(momentFile));
 
 app.use('/', express.static(public));
